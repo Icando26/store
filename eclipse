@@ -1,0 +1,89 @@
+package com.it.day18.test;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class MapTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// 创建
+		/*
+		 * Map<String, String> map = new HashMap<String, String>(); map.put("1",
+		 * "吕布"); map.put("2", "赵云"); map.put("3", "典韦"); //输出map
+		 * System.out.println("map:"+map); //删除 remove和clear（但是这个是全部删除，一般不用）
+		 * System.out.println("remove:"+map.remove(2));
+		 * 
+		 * //修改采用put 因为针对一样的话，就是做替换修改 System.out.println("replace:"+map.put("3",
+		 * "貂蝉")); System.out.println("map:"+map);
+		 * 
+		 * //获取 //根据键获取值 System.out.println("get方式--"+map.get(1));
+		 * 
+		 * //setkey方式 Set<String> set = map.keySet();
+		 * 
+		 * for(String i : set){ System.out.println(i); }
+		 */
+
+		// 创建一个hashmap集合
+		HashMap<String, Student> hm = new HashMap<String, Student>();
+
+		hm.put("1001", new Student("ss", 11));
+		hm.put("1002", new Student("ss", 12));
+		hm.put("1003", new Student("s1", 10));
+
+		Set<String> keySet = hm.keySet();
+		for (String key : keySet) {
+			Student stu = hm.get(key);
+			System.out.println("学生：" + stu.getName() + "---" + stu.getAge());
+		}
+		// Student stu = hm.get("1001");
+		// System.out.println("学生："+stu.getName()+"---"+stu.getAge());
+
+		// 通过键值对的形式，类似结婚证找到丈夫和妻子
+		// Set<Entry<String,String>> entrySet = map.entrySet();
+		Set entryset = hm.entrySet();
+		Iterator it = entryset.iterator();
+
+		while (it.hasNext()) {
+
+			Map.Entry<String, Student> entry = (Entry<String, Student>) it
+					.next();
+			String s = entry.getKey();
+			Student stu = entry.getValue();
+			System.out.println(s + ".." + stu.getName() + "--" + stu.getAge());
+		}
+
+		HashSet<String> sh = new HashSet<String>();
+		sh.add("s");
+
+		System.out.println("统计字符串各个字符的个数：-------");
+		String s = "abcdabcetyt";
+		System.out.println(s);
+		TreeMap<Character, Integer> tm = new TreeMap<Character, Integer>();
+		char[] c = s.toCharArray();
+
+		for (int i = 0; i < c.length; i++) {
+			if (tm.put(c[i], 1) != null) {
+				int count = tm.get(c[i])+1;
+				tm.put(c[i], count);
+			}
+		}
+		
+      Set<Character> keySet2 = tm.keySet();
+      StringBuffer sb = new StringBuffer();
+      for(char c1 : keySet2){
+    	  //System.out.println(c1+"..."+tm.get(c1));
+    	  
+    	  sb.append(c1).append("(").append(tm.get(c1)).append(")");
+      }
+      System.out.println(sb.toString());
+	}
+
+}
